@@ -1,19 +1,16 @@
 import cv2
- 
-# capture frames from a video
 cap = cv2.VideoCapture('C://Users//SAKSHIM//Documents//python//opencv//abc3.mp4')
 size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
 fourcc = cv2.VideoWriter_fourcc(*'DIVX')
 video = cv2.VideoWriter("C://Users//SAKSHIM//Documents//python//opencv//abc2.avi", fourcc, 25, size)
 # Trained XML classifiers describes some features of some object we want to detect
-car_cascade = cv2.CascadeClassifier('C://Users//SAKSHIM//AppData//Local//Programs//Python//Python36-32//Lib//site-packages//cv2//cars.xml')
+car_cascade = cv2.CascadeClassifier('C://Users//SAKSHIM//Documents//python//opencv//cars.xml')
 # loop runs if capturing has been initialized.
 (major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 if int(major_ver)  < 3 :
     fps = cap.get(cv2.cv.CV_CAP_PROP_FPS)
 else :
     fps = cap.get(cv2.CAP_PROP_FPS)
-#:if
 intTimeToNextFrame=int(1000.0/fps)-12 # '-12' estimation of time for processing
 while True:
     (grabbed,frame) = cap.read()
