@@ -1,6 +1,22 @@
 import cv2
 import imutils
+import time
 import matplotlib.pyplot as plt
+import pyrebase
+config = {
+  "apiKey": "AIzaSyCt7Q0S7H_cuaspK6gXB7dVeX0xD1RNfYU",
+  "authDomain": "pytest-214109.firebaseapp.com",
+  "databaseURL": "https://pytest-214109.firebaseio.com",
+  "storageBucket": "pytest-214109.appspot.com",
+  "serviceAccount": "/Users/SAKSHIM/Documents/python/pyrebase/pytest-214109-2fcef3c3ba83.json"
+#  "messagingSenderId": "325355378495"
+}
+firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
+user = auth.sign_in_with_email_and_password("fileindie@gmail.com", "saksneh098")
+user = auth.refresh(user['refreshToken'])
+db = firebase.database()
+
 backsub = cv2.createBackgroundSubtractorMOG2()
 cap = cv2.VideoCapture("C://Users//SAKSHIM//Documents//python//opencv/q.mp4") 
 i = j= c= 0
@@ -28,12 +44,16 @@ while True:
                 i=i+1
                 cv2.line(frame,(150,250),(297,249),(0,255,0),5)
                 c=4
+                data={"time": time.time(), "count_l":i}
+                res=db.child("place").child("1234").push(data, user['idToken'])
                 print(i)
             
             elif x>552 and x<558 and y>299 and y<355 or( x>461 and x<470 and y>325 and y<335):
                 j=j+1
                 cv2.line(frame,(552,299),(461,335),(0,255,0),5)
                 c=4
+                data={"time": time.time(), "count_r":j}
+                res=db.child("place").child("1234").push(data, user['idToken'])
                 print(j)
         else:
             c=c-1  
