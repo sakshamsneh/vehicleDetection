@@ -3,17 +3,10 @@ import imutils
 import time
 import matplotlib.pyplot as plt
 import pyrebase
-config = {
-  "apiKey": "AIzaSyCt7Q0S7H_cuaspK6gXB7dVeX0xD1RNfYU",
-  "authDomain": "pytest-214109.firebaseapp.com",
-  "databaseURL": "https://pytest-214109.firebaseio.com",
-  "storageBucket": "pytest-214109.appspot.com",
-  "serviceAccount": "/Users/SAKSHIM/Documents/python/pyrebase/pytest-214109-2fcef3c3ba83.json"
-#  "messagingSenderId": "325355378495"
-}
+
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
-user = auth.sign_in_with_email_and_password("fileindie@gmail.com", "saksneh098")
+user = auth.sign_in_with_email_and_password()
 user = auth.refresh(user['refreshToken'])
 db = firebase.database()
 
